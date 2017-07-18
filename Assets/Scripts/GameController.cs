@@ -12,6 +12,12 @@ public class GameController : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] float sizeMax;
     [SerializeField] float speed;
 
+    // Параметры игры
+    private int score;
+
+    // Utils
+    private System.DateTime dt;
+
     // Компоненты
     private GameView view;
 
@@ -19,6 +25,8 @@ public class GameController : MonoBehaviour
     {
         // подписываемся на событие успешной подгрузки
         Main.Instance.OnBundleLoadedSuccessfully += InitGame;
+        dt = new System.DateTime();
+        InvokeRepeating("UpdateTimer", 1, 1);
     }
 
     private void InitGame()
@@ -29,6 +37,12 @@ public class GameController : MonoBehaviour
 
         view.Init(); // инициализация визульной части сцены
         CreateFalingCircle();
+    }
+
+    private void UpdateTimer()
+    {
+        dt = dt.AddSeconds(1);
+        view.UpdateTime(dt.ToString("mm:ss"));
     }
 
     // активируем падение кружочков

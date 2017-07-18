@@ -16,6 +16,8 @@ public class GameView : MonoBehaviour
         // находим компоненты
         canvas = FindObjectOfType<Canvas>();
         AddBackground();
+        scoreItem.Init();
+        timeItem.Init();
     }
 
     private void AddBackground()
@@ -41,5 +43,5 @@ public class GameView : MonoBehaviour
     {
         timeItem.UpdateScore(_time);
     }
-    
+
 }
