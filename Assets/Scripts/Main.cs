@@ -7,6 +7,7 @@ public class Main : MonoBehaviour
 {
     public static Main Instance;
 
+    private WWW www;
     public AssetBundle bundle { get; protected set; }
     public bool bundleLoaded = false;
     public event Action OnBundleLoadedSuccessfully = () => { };
@@ -22,13 +23,13 @@ public class Main : MonoBehaviour
         var h = Camera.main.orthographicSize * 2;
         cameraSize = new Vector2(Camera.main.aspect * h, h);
 
-        
+
     }
 
     // перед стартом игры подгружаем бандл
     IEnumerator Start()
     {
-        WWW www = new WWW("http://nrjwolf.com/bundle/circlegamebundle");
+        www = new WWW("http://nrjwolf.com/bundle/circlegamebundle");
         yield return www;
 
         if (www.assetBundle != null)
@@ -41,6 +42,15 @@ public class Main : MonoBehaviour
         else
         {
             Debug.Log(www.error);
+        }
+    }
+
+    void Update()
+    {
+        if (!bundleLoaded && www != null)
+        {
+            var percent = (int)(www.progress * 100);
+            FindObjectOfType<GameView>().UpdateLoadingText(percent.ToString());
         }
     }
 }

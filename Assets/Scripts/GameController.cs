@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] float speed;
 
     // Параметры игры
+    private bool isGame = false;
     private int score;
 
     // Utils
@@ -52,17 +53,25 @@ public class GameController : MonoBehaviour
 
     private void InitGame()
     {
-        Debug.Log("Init game");
         // находим компоненты
         view = FindObjectOfType<GameView>();
 
         view.Init(); // инициализация визульной части сцены
+        view.AddPlayButton();
+        view.OnPlayButtonClicked += StartGame;
+    }
+
+    private void StartGame()
+    {
+        view.AddScoreItemsOnScene();
         CreateFalingCircle();
     }
 
     // обновляем счетчик времени
     private void UpdateTimer()
     {
+        if (!isGame)
+            return;
         dt = dt.AddSeconds(1);
         view.UpdateTime(dt.ToString("mm:ss"));
     }

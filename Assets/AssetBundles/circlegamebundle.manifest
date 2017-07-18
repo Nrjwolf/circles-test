@@ -1,19 +1,40 @@
 ManifestFileVersion: 0
-CRC: 911179459
+CRC: 4172386666
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f5223a90aa477484ede04b426c9c4564
+    Hash: d22978d17fc9f8c200f7bd96d4f93730
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4774d6da9b606debf00b5a5d61c4487c
+    Hash: 1dff77c9c9e80213bdcf20672f33caec
 HashAppended: 0
 ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+- Class: 114
+  Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+- Class: 114
+  Script: {fileID: 1453722849, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+- Class: 115
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
 Assets:
+- Assets/Prefabs/StartButton.prefab
 - Assets/Sprites/Rectangle.png
 - Assets/Sprites/whiteOval.png
 - Assets/Sprites/whiteSquare.png
