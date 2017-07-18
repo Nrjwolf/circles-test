@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] float sizeMin;
     [SerializeField] [Range(0f, 1f)] float sizeMax;
     [SerializeField] float speed;
+    [SerializeField] [Range(0.01f, 0.1f)] float speedStep;
+    [SerializeField] [Range(1f, 10f)] float speedMax;
 
     // Параметры игры
     private bool isGame = false;
@@ -76,6 +78,9 @@ public class GameController : MonoBehaviour
             return;
         dt = dt.AddSeconds(1);
         view.UpdateTime(dt.ToString("mm:ss"));
+
+        if (speed < speedMax)
+            speed += speedStep;
     }
 
     private void UpdateScore(int _plus)
