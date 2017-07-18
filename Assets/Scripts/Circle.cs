@@ -32,7 +32,7 @@ public class Circle : MonoBehaviour
 
         // колайдер
         var cldr = gameObject.AddComponent<CircleCollider2D>();
-        // cldr.isTrigger = true;
+        cldr.isTrigger = true;
         cldr.radius = 1.15f;
 
         var _score = (int)(_speed / _size);

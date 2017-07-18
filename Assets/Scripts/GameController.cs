@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     // Параметры игры
     private bool isGame = false;
     private int score;
+    private int colorAvailable = 2;
 
     // Utils
     private System.DateTime dt;
@@ -81,6 +82,9 @@ public class GameController : MonoBehaviour
 
         if (speed < speedMax)
             speed += speedStep;
+
+        if(dt.Second > 0 && dt.Second % 10 == 0 && colorAvailable < colors.Length) 
+            colorAvailable ++;
     }
 
     private void UpdateScore(int _plus)
@@ -93,7 +97,7 @@ public class GameController : MonoBehaviour
     private void CreateFalingCircle()
     {
         Sprite spr = Main.Instance.bundle.LoadAsset<Sprite>("assets/sprites/whiteOval.png"); // подгружаем спрайт
-        Color32 clr = colors[Random.Range(0, colors.Length)]; // выбираем цвет
+        Color32 clr = colors[Random.Range(0, colorAvailable)]; // выбираем цвет
         float size = Random.Range(sizeMin, sizeMax);
         // расчет позиции
         float sizeSprite = spr.rect.width * size / Main.PIXELS_PER_UNIT;
