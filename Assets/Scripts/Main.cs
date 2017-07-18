@@ -20,10 +20,9 @@ public class Main : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
+        // размеры экрана
         var h = Camera.main.orthographicSize * 2;
         cameraSize = new Vector2(Camera.main.aspect * h, h);
-
-
     }
 
     // перед стартом игры подгружаем бандл
@@ -45,6 +44,7 @@ public class Main : MonoBehaviour
         }
     }
 
+    // показываем прогресс загрузки бандла
     void Update()
     {
         if (!bundleLoaded && www != null)

@@ -5,6 +5,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
+/**
+*   Скрипт отвечает за отображение различных элементов на экране
+*
+*/
+
 public class GameView : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI loadingText;
@@ -22,11 +27,13 @@ public class GameView : MonoBehaviour
         timeItem.Init();
     }
 
+    // анимация появления счетчиков
     public void AddScoreItemsOnScene()
     {
         leftBottomPanel.DOAnchorPosX(-leftBottomPanel.anchoredPosition.x, 0.2f).SetEase(Ease.OutBack);
     }
 
+    // добавление на сцену кнопки PLAY
     public void AddPlayButton()
     {
         RemoveLoadingText();
@@ -37,6 +44,7 @@ public class GameView : MonoBehaviour
         btnPlay.GetComponent<Button>().onClick.AddListener(OnPlayButton);
     }
 
+    // Действие на нажатие кнопки плей
     private void OnPlayButton()
     {
         btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -50,21 +58,25 @@ public class GameView : MonoBehaviour
         spikes.Init();
     }
 
+    // Обновление текста загрузки
     public void UpdateLoadingText(string _text)
     {
         loadingText.text = string.Format("Loading {0}%", _text);
     }
 
+    // Убираем текст загрузки
     public void RemoveLoadingText()
     {
         Destroy(loadingText);
     }
 
+    // Обновление текста очков
     public void UpdateScore(string _score)
     {
         scoreItem.UpdateScore(_score);
     }
 
+    // Обновление текста таймера
     public void UpdateTime(string _time)
     {
         timeItem.UpdateScore(_time);

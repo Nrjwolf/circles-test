@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+/**
+*   Скрипт отвечает за игровую логику
+*
+*/
+
 public class GameController : MonoBehaviour
 {
     // Парметры на старте игры

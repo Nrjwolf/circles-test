@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
+/**
+*   Скрипт круожочка
+*
+*/
+
 public class Circle : MonoBehaviour
 {
 
@@ -16,6 +21,7 @@ public class Circle : MonoBehaviour
 
     const float ANIMATION_TIME = 0.2f;
 
+    // Присваивание параметров для игры
     public void Init(Vector2 _postition, Color32 _color, float _size, float _speed)
     {
         var spr = gameObject.GetComponent<SpriteRenderer>();
@@ -41,6 +47,7 @@ public class Circle : MonoBehaviour
         isAvailable = true;
     }
 
+    
     void Update()
     {
         if (!isAvailable)
@@ -49,6 +56,7 @@ public class Circle : MonoBehaviour
         CheckDeathPosition();
     }
 
+    // Взрывная цепь для других шаров
     private void ExplosionDamage(Vector3 center, float radius)
     {
         var hitColliders = Physics2D.OverlapCircleAll(center, radius);
@@ -60,6 +68,7 @@ public class Circle : MonoBehaviour
         }
     }
 
+    // Для эффекта проседания шипов
     private void SpikeEffect(Vector3 center, float radius)
     {
         var hitColliders = Physics2D.OverlapCircleAll(center, radius);
@@ -73,6 +82,7 @@ public class Circle : MonoBehaviour
         }
     }
 
+    // Проверка позиции, если перешел границу - взрываем
     private void CheckDeathPosition()
     {
         if (transform.position.y < deathPosition)
@@ -81,6 +91,7 @@ public class Circle : MonoBehaviour
         }
     }
 
+    // На клик по шарику - взрываем, прибавляем очки
     public void OnMouseDown()
     {
         if (!isAvailable)
@@ -90,6 +101,7 @@ public class Circle : MonoBehaviour
         Destroy();
     }
 
+    // Задаем нужный спрайт
     public void SetSprite(Sprite spr)
     {
         if (GetComponent<SpriteRenderer>() == null)
@@ -98,6 +110,7 @@ public class Circle : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = spr;
     }
 
+    // Уничтоаем, анимируем, вызываем эффекты
     public void Destroy(float _delay = 0)
     {
         if (!isAvailable)
