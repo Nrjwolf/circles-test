@@ -67,6 +67,8 @@ public class GameController : MonoBehaviour
         view.Init(); // инициализация визульной части сцены
         view.AddPlayButton();
         view.OnPlayButtonClicked += StartGame;
+
+        SoundController.instance.Init();
     }
 
     private void StartGame()

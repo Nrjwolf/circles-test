@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3748579858
+CRC: 449759406
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4849e4d64485adc71c6a1f6dbcbce233
+    Hash: 2a98cb2a47ea0c069d6add7121c540df
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1dff77c9c9e80213bdcf20672f33caec
+    Hash: 86028ddf10a445181f79056565828e5f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -16,6 +16,8 @@ ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 83
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -34,7 +36,10 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Sounds/fall_on_spike.mp3
 - Assets/Sprites/Triangle.png
+- Assets/Sounds/blob.mp3
+- Assets/Sounds/click.mp3
 - Assets/Prefabs/StartButton.prefab
 - Assets/Sprites/Rectangle.png
 - Assets/Sprites/whiteOval.png

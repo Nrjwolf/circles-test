@@ -32,6 +32,7 @@ public class SpikesController : MonoBehaviour
     {
         var box = spikes.Find(b => b == _box);
         box.GetComponent<RectTransform>().DOPunchAnchorPos(new Vector2(0, -10), 0.2f, 5, 0.8f);
+        SoundController.instance.PlaySound(SoundName.FALL_ON_SPIKES);
     }
 
 }

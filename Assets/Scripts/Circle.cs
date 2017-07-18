@@ -127,6 +127,7 @@ public class Circle : MonoBehaviour
                 OnClicked(scoresOnClick);
             Destroy(gameObject);
         });
+        SoundController.instance.PlaySound(SoundName.BLOB);
     }
 
 }

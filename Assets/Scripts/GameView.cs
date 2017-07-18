@@ -46,7 +46,8 @@ public class GameView : MonoBehaviour
 
     // Действие на нажатие кнопки плей
     private void OnPlayButton()
-    {
+    {   
+        SoundController.instance.PlaySound(SoundName.CLICK);
         btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
         var time = 0.2f;
         btnPlay.GetComponent<RectTransform>().DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), time, 8, 0.8f);
