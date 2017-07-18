@@ -65,6 +65,8 @@ public class GameController : MonoBehaviour
     {
         view.AddScoreItemsOnScene();
         CreateFalingCircle();
+
+        isGame = true;
     }
 
     // обновляем счетчик времени

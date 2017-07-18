@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4172386666
+CRC: 3748579858
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d22978d17fc9f8c200f7bd96d4f93730
+    Hash: 4849e4d64485adc71c6a1f6dbcbce233
   TypeTreeHash:
     serializedVersion: 2
     Hash: 1dff77c9c9e80213bdcf20672f33caec
@@ -34,6 +34,7 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Sprites/Triangle.png
 - Assets/Prefabs/StartButton.prefab
 - Assets/Sprites/Rectangle.png
 - Assets/Sprites/whiteOval.png

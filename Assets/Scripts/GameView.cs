@@ -11,9 +11,10 @@ public class GameView : MonoBehaviour
     [SerializeField] RectTransform leftBottomPanel;
     [SerializeField] ScoreItemIcon scoreItem;
     [SerializeField] ScoreItemIcon timeItem;
+    [SerializeField] SpikesController spikes;
 
     private GameObject btnPlay;
-    public event System.Action OnPlayButtonClicked = () => {};
+    public event System.Action OnPlayButtonClicked = () => { };
 
     public void Init()
     {
@@ -44,6 +45,9 @@ public class GameView : MonoBehaviour
         btnPlay.GetComponent<Image>().DOFade(0, time);
         btnPlay.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, time);
         OnPlayButtonClicked();
+
+        // добавление шипов
+        spikes.Init();
     }
 
     public void UpdateLoadingText(string _text)
