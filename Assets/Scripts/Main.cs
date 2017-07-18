@@ -8,7 +8,7 @@ public class Main : MonoBehaviour
     public static Main Instance;
 
     public AssetBundle bundle { get; protected set; }
-    private bool bundleLoaded = false;
+    public bool bundleLoaded = false;
     public event Action OnBundleLoadedSuccessfully = () => { };
     [HideInInspector] public Vector2 cameraSize;
 

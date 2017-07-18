@@ -9,17 +9,20 @@ public class Circle : MonoBehaviour
     private Color32 color;
     private bool isAvailable = false;
     private float speed = 0.1f;
-    private float deathPosition;
+    private float deathPosition; // нижняя граница, при пересечении шарик лопается
 
-    public void Init(Vector2 _postition, Sprite _sprite, Color32 _color, float _size, float _speed)
+    private int scoresOnClick;
+    public event System.Action<int> OnClicked;
+
+    const float ANIMATION_TIME = 0.2f;
+
+    public void Init(Vector2 _postition, Color32 _color, float _size, float _speed)
     {
-        var spr = gameObject.AddComponent<SpriteRenderer>();
+        var spr = gameObject.GetComponent<SpriteRenderer>();
 
         transform.position = _postition;
         transform.localScale = new Vector2(_size, _size);
-        spr.sprite = _sprite;
         spr.color = _color;
-        spr.sortingOrder = 1;
         speed = _speed;
 
         float sizeSprite = spr.sprite.rect.width * _size / Main.PIXELS_PER_UNIT;
@@ -28,18 +31,13 @@ public class Circle : MonoBehaviour
 
         // колайдер
         var cldr = gameObject.AddComponent<CircleCollider2D>();
-        cldr.isTrigger = true;
-		cldr.radius = 1.15f;
-    }
+        // cldr.isTrigger = true;
+        cldr.radius = 1.15f;
 
-    void Start()
-    {
+        var _score = (int)(_speed / _size);
+        scoresOnClick = _score > 0 ? _score : 1;
+
         isAvailable = true;
-    }
-
-    public void OnMouseDown()
-    {
-        Destroy();
     }
 
     void Update()
@@ -50,6 +48,16 @@ public class Circle : MonoBehaviour
         CheckDeathPosition();
     }
 
+    void ExplosionDamage(Vector3 center, float radius)
+    {
+        var hitColliders = Physics2D.OverlapCircleAll(center, radius);
+        foreach (var item in hitColliders)
+        {
+            item.GetComponent<Circle>().Destroy();
+        }
+
+    }
+
     private void CheckDeathPosition()
     {
         if (transform.position.y < deathPosition)
@@ -58,13 +66,34 @@ public class Circle : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    public void OnMouseDown()
     {
+        if (!isAvailable)
+            return;
+
+        OnClicked(scoresOnClick);
+        Destroy();
+    }
+
+    public void SetSprite(Sprite spr)
+    {
+        if (GetComponent<SpriteRenderer>() == null)
+            gameObject.AddComponent<SpriteRenderer>();
+
+        GetComponent<SpriteRenderer>().sprite = spr;
+    }
+
+    public void Destroy(float _delay = 0)
+    {
+        if (!isAvailable)
+            return;
+
         isAvailable = false;
-        float time = 0.2f;
-        GetComponent<SpriteRenderer>().DOFade(0, time);
-        transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.1f), time, 2, 1).OnComplete(() =>
+        GetComponent<SpriteRenderer>().DOFade(0, ANIMATION_TIME).SetDelay(_delay);
+        transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.1f), ANIMATION_TIME, 2, 1).SetDelay(_delay).OnComplete(() =>
         {
+            // эффект взрывной цепи
+            ExplosionDamage(transform.position, GetComponent<CircleCollider2D>().bounds.size.x / 2);
             Destroy(gameObject);
         });
     }

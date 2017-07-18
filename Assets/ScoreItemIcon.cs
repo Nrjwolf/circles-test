@@ -3,10 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-
+using DG.Tweening;
 
 public class ScoreItemIcon : MonoBehaviour
 {
+
+    [SerializeField] bool punchAnimation = false;
+	[ConditionalHide("punchAnimation", false)]
+	[SerializeField] float punchPower = 0.2f;
 
     private Image image;
     private DynamicTextMeshScale dynamicScale;
@@ -28,5 +32,9 @@ public class ScoreItemIcon : MonoBehaviour
     {
         text.text = _text;
         dynamicScale.UpdateScale();
+
+        if (!punchAnimation)
+            return;
+        image.transform.DOPunchScale(new Vector3(punchPower, punchPower, punchPower), punchPower, 2, 0.5f);
     }
 }

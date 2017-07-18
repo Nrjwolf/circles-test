@@ -29,6 +29,27 @@ public class GameController : MonoBehaviour
         InvokeRepeating("UpdateTimer", 1, 1);
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+            OnMouseDown();
+    }
+
+    // создаем визуальный эффект на клик мыши
+    private void OnMouseDown()
+    {
+        if (!Main.Instance.bundleLoaded)
+            return;
+
+        // преобразовываем координаты мыши в игровые координаты
+        var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // создаем кружок
+        var go = CreateCircle();
+        var circle = go.GetComponent<Circle>();
+        circle.Init(pos, Color.white, .05f, 0);
+        circle.Destroy();
+    }
+
     private void InitGame()
     {
         Debug.Log("Init game");
@@ -39,13 +60,20 @@ public class GameController : MonoBehaviour
         CreateFalingCircle();
     }
 
+    // обновляем счетчик времени
     private void UpdateTimer()
     {
         dt = dt.AddSeconds(1);
         view.UpdateTime(dt.ToString("mm:ss"));
     }
 
-    // активируем падение кружочков
+    private void UpdateScore(int _plus)
+    {
+        score += _plus;
+        view.UpdateScore(score.ToString());
+    }
+
+    // создаем падающий кружок с игровыми параметрами
     private void CreateFalingCircle()
     {
         Sprite spr = Main.Instance.bundle.LoadAsset<Sprite>("assets/sprites/whiteOval.png"); // подгружаем спрайт
@@ -56,14 +84,23 @@ public class GameController : MonoBehaviour
         float posX = Random.Range(-Main.Instance.cameraSize.x / 2 + sizeSprite / 2, Main.Instance.cameraSize.x / 2 - sizeSprite / 2);
         float posY = Main.Instance.cameraSize.y / 2 + sizeSprite / 2;
         Vector2 pos = new Vector2(posX, posY);
-        // расчет 
+        // расчет скорости
         float circleSpeed = speed / size;
         // создаем кружок
-        GameObject circle = new GameObject("Circle");
-        circle.AddComponent<Circle>();
-        circle.GetComponent<Circle>().Init(pos, spr, clr, size, circleSpeed);
+        Circle circle = CreateCircle().GetComponent<Circle>();
+        circle.Init(pos, clr, size, circleSpeed);
         circle.transform.SetParent(circlesParentTransformObject);
+        // подписываемся на событие клика по шарику
+        circle.OnClicked += UpdateScore;
+        Invoke("CreateFalingCircle", 0.5f);
+    }
 
-        DOVirtual.DelayedCall(1f, CreateFalingCircle);
+    private GameObject CreateCircle()
+    {
+        var go = new GameObject("Circle");
+        Circle circle = go.AddComponent<Circle>();
+        Sprite spr = Main.Instance.bundle.LoadAsset<Sprite>("assets/sprites/whiteOval.png"); // подгружаем спрайт
+        circle.SetSprite(spr);
+        return go;
     }
 }
