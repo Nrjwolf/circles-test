@@ -8,6 +8,9 @@ public class GameView : MonoBehaviour
 
     private Canvas canvas;
 
+    [SerializeField] ScoreItemIcon scoreItem;
+    [SerializeField] ScoreItemIcon timeItem;
+
     public void Init()
     {
         // находим компоненты
@@ -28,4 +31,15 @@ public class GameView : MonoBehaviour
         // фон на задний план
         bg.transform.SetSiblingIndex(0);
     }
+
+    public void UpdateScore(string _score)
+    {
+        scoreItem.UpdateScore(_score);
+    }
+
+    public void UpdateTime(string _time)
+    {
+        timeItem.UpdateScore(_time);
+    }
+    
 }

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3961221161
+CRC: 911179459
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6d55a83a5bf916886c67b4ce87ce2b83
+    Hash: f5223a90aa477484ede04b426c9c4564
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4774d6da9b606debf00b5a5d61c4487c
@@ -14,6 +14,7 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
+- Assets/Sprites/Rectangle.png
 - Assets/Sprites/whiteOval.png
 - Assets/Sprites/whiteSquare.png
 Dependencies: []
