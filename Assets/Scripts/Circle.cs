@@ -2,9 +2,10 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 /**
-*   Скрипт круожочка
+*   Circle script
 *
 */
 
@@ -14,14 +15,14 @@ public class Circle : MonoBehaviour
     private Color32 color;
     private bool isAvailable = false;
     private float speed = 0.1f;
-    private float deathPosition; // нижняя граница, при пересечении шарик лопается
+    private float deathPosition; //  lower border, when circle crosses it blows up
 
     private int scoresOnClick;
-    public event System.Action<int> OnClicked;
+    public event Action<int> OnClicked;
 
     const float ANIMATION_TIME = 0.2f;
 
-    // Присваивание параметров для игры
+    // Some parametrs for game
     public void Init(Vector2 _postition, Color32 _color, float _size, float _speed)
     {
         var spr = gameObject.GetComponent<SpriteRenderer>();
@@ -56,7 +57,7 @@ public class Circle : MonoBehaviour
         CheckDeathPosition();
     }
 
-    // Взрывная цепь для других шаров
+    // explosive reaction for other circles
     private void ExplosionDamage(Vector3 center, float radius)
     {
         var hitColliders = Physics2D.OverlapCircleAll(center, radius);
@@ -68,7 +69,7 @@ public class Circle : MonoBehaviour
         }
     }
 
-    // Для эффекта проседания шипов
+    // For animation of spikes (punch down)
     private void SpikeEffect(Vector3 center, float radius)
     {
         var hitColliders = Physics2D.OverlapCircleAll(center, radius);
@@ -82,7 +83,7 @@ public class Circle : MonoBehaviour
         }
     }
 
-    // Проверка позиции, если перешел границу - взрываем
+    // Checking : is circle crossed the border
     private void CheckDeathPosition()
     {
         if (transform.position.y < deathPosition)
@@ -91,7 +92,7 @@ public class Circle : MonoBehaviour
         }
     }
 
-    // На клик по шарику - взрываем, прибавляем очки
+    // When clicked on circle — destroy it and give some scores
     public void OnMouseDown()
     {
         if (!isAvailable)
@@ -110,7 +111,7 @@ public class Circle : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = spr;
     }
 
-    // Уничтоаем, анимируем, вызываем эффекты
+    // Destroy with animation
     public void Destroy(float _delay = 0)
     {
         if (!isAvailable)

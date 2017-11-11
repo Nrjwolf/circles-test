@@ -6,7 +6,7 @@ using DG.Tweening;
 using TMPro;
 
 /**
-*   Скрипт отвечает за отображение различных элементов на экране
+*   Script of scene view
 *
 */
 
@@ -27,13 +27,13 @@ public class GameView : MonoBehaviour
         timeItem.Init();
     }
 
-    // анимация появления счетчиков
+    // Animations of counters
     public void AddScoreItemsOnScene()
     {
         leftBottomPanel.DOAnchorPosX(-leftBottomPanel.anchoredPosition.x, 0.2f).SetEase(Ease.OutBack);
     }
 
-    // добавление на сцену кнопки PLAY
+    // Play button add on scene
     public void AddPlayButton()
     {
         RemoveLoadingText();
@@ -44,9 +44,9 @@ public class GameView : MonoBehaviour
         btnPlay.GetComponent<Button>().onClick.AddListener(OnPlayButton);
     }
 
-    // Действие на нажатие кнопки плей
+    // Play button action
     private void OnPlayButton()
-    {   
+    {
         SoundController.instance.PlaySound(SoundName.CLICK);
         btnPlay.GetComponent<Button>().onClick.RemoveAllListeners();
         var time = 0.2f;
@@ -55,29 +55,28 @@ public class GameView : MonoBehaviour
         btnPlay.GetComponentInChildren<TextMeshProUGUI>().DOFade(0, time);
         OnPlayButtonClicked();
 
-        // добавление шипов
+        // add spikes
         spikes.Init();
     }
 
-    // Обновление текста загрузки
+    //  Loading text update
     public void UpdateLoadingText(string _text)
     {
         loadingText.text = string.Format("Loading {0}%", _text);
     }
 
-    // Убираем текст загрузки
     public void RemoveLoadingText()
     {
         Destroy(loadingText);
     }
 
-    // Обновление текста очков
+    // Update score text
     public void UpdateScore(string _score)
     {
         scoreItem.UpdateScore(_score);
     }
 
-    // Обновление текста таймера
+    // Update timer text
     public void UpdateTime(string _time)
     {
         timeItem.UpdateScore(_time);

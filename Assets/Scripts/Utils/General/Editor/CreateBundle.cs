@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class CreateBundle : MonoBehaviour
 {
-    // создание бандлов
+    // create bundle
     [MenuItem("Assets/Build Asset Bundles/Android")]
     static void BuildAsset()
     {

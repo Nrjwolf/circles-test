@@ -11,10 +11,10 @@ public class SpikesController : MonoBehaviour
 
     private List<BoxCollider2D> spikes;
 
-    // эффект появления шипов
+    // init spikes with effect
     public void Init()
     {
-        // Находим шипы, сортируем по имени, добавляем спрайт, анимируем
+        // Find spikes, sort and animate
         spikes = transform.GetComponentsInChildren<BoxCollider2D>().ToList();
         spikes.Sort((a, b) => string.Compare(a.name, b.name));
         for (int i = 0; i < spikes.Count; i++)
@@ -27,7 +27,6 @@ public class SpikesController : MonoBehaviour
         }
     }
 
-    // Анимация проседания шипа
     public void SpikeAnimation(BoxCollider2D _box)
     {
         var box = spikes.Find(b => b == _box);

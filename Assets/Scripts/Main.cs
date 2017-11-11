@@ -20,12 +20,12 @@ public class Main : MonoBehaviour
         if (Instance == null)
             Instance = this;
 
-        // размеры экрана
+        // screen size
         var h = Camera.main.orthographicSize * 2;
         cameraSize = new Vector2(Camera.main.aspect * h, h);
     }
 
-    // перед стартом игры подгружаем бандл
+    // before start the game — load bundle
     IEnumerator Start()
     {
         www = new WWW("http://nrjwolf.com/bundle/circlegamebundle");
@@ -36,7 +36,7 @@ public class Main : MonoBehaviour
             bundle = www.assetBundle;
             bundleLoaded = true;
             Debug.Log("Asset loaded successfully : \n" + bundle.GetAllAssetNames().JoinToString(",\n"));
-            OnBundleLoadedSuccessfully(); // event сообщает об успешной закгрузке
+            OnBundleLoadedSuccessfully(); // event : loading done
         }
         else
         {
@@ -44,7 +44,7 @@ public class Main : MonoBehaviour
         }
     }
 
-    // показываем прогресс загрузки бандла
+    // bundle loading progress
     void Update()
     {
         if (!bundleLoaded && www != null)
